@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Car } from '../components/home/home.component';  // Import the Car interface
 
@@ -8,12 +8,15 @@ import { Car } from '../components/home/home.component';  // Import the Car inte
 })
 
 export class CarService {
-  private baseURL = 'http://localhost:3000/api';  // Use the correct endpoint URL
+  private baseURL = 'https://cars-metrics-backend.onrender.com/api';  
+  // private baseURL = 'http://localhost:3000/api';  
 
   constructor(private http: HttpClient) { }
 
   getCars(): Observable<Car[]> {
-    return this.http.get<Car[]>(`${this.baseURL}/cars`);
+    // Append timestamp to prevent caching
+    const params = new HttpParams().set('timestamp', new Date().getTime().toString());
+    return this.http.get<Car[]>(`${this.baseURL}/cars`, { params });
   }
 
   downloadCsv(): Observable<Blob> {
