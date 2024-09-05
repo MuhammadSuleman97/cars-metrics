@@ -1,0 +1,54 @@
+.car-form {
+  display: flex;
+  flex-direction: column;
+  max-width: 600px;
+  margin: 20px auto; /* Add some top/bottom margin for spacing */
+  padding: 0 16px; /* Add padding to make form elements not touch screen edges on small devices */
+}
+
+mat-form-field {
+  margin-bottom: 16px;
+  width: 100%; /* Ensure fields stretch to the container width */
+}
+
+button {
+  align-self: flex-end;
+}
+
+.add-car-form-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 16px;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .car-form {
+    max-width: 100%; /* Make the form use full width on small screens */
+    padding: 0 8px; /* Reduce padding on smaller screens */
+  }
+}
+
+.create-button {
+  background-color: #28a745; /* Success color */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 12px 24px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  max-width: 200px;
+  margin-left: auto; /* Align the button to the right */
+}
+
+.create-button:hover {
+  background-color: #218838; /* Darker shade for hover effect */
+}
+
+.create-button:focus {
+  outline: none;
+}

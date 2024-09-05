@@ -1,0 +1,122 @@
+
+<div class="main-content">
+  <mat-card>
+    <div class="header-container">
+      <mat-card-title class="header-title">Car Table</mat-card-title>
+      <button class="create-button" color="primary" (click)="navigateToForm()">Add New Car</button>
+      <input type="file" #fileInput style="display: none" (change)="onFileChange($event)">
+      <button mat-raised-button color="accent" (click)="fileInput.click()">Upload CSV</button>
+        <mat-spinner *ngIf="isLoading" diameter="24" class="upload-spinner"></mat-spinner>
+    </div>
+    <mat-card-content>
+      <!-- Filter Section -->
+      <form [formGroup]="filterForm" class="filter-form">
+        <mat-form-field appearance="fill">
+          <mat-label>Name</mat-label>
+          <input matInput formControlName="name" placeholder="Filter by name">
+        </mat-form-field>
+      
+        <mat-form-field appearance="fill">
+          <mat-label>MPG</mat-label>
+          <input matInput formControlName="mpg" placeholder="Filter by MPG">
+        </mat-form-field>
+      
+        <mat-form-field appearance="fill">
+          <mat-label>Cylinders</mat-label>
+          <input matInput formControlName="cylinders" placeholder="Filter by cylinders">
+        </mat-form-field>
+      
+        <mat-form-field appearance="fill">
+          <mat-label>Displacement</mat-label>
+          <input matInput formControlName="displacement" placeholder="Filter by displacement">
+        </mat-form-field>
+      
+        <mat-form-field appearance="fill">
+          <mat-label>Horsepower</mat-label>
+          <input matInput formControlName="horsepower" placeholder="Filter by horsepower">
+        </mat-form-field>
+      
+        <mat-form-field appearance="fill">
+          <mat-label>Weight</mat-label>
+          <input matInput formControlName="weight" placeholder="Filter by weight">
+        </mat-form-field>
+      
+        <mat-form-field appearance="fill">
+          <mat-label>Acceleration</mat-label>
+          <input matInput formControlName="acceleration" placeholder="Filter by acceleration">
+        </mat-form-field>
+      
+        <mat-form-field appearance="fill">
+          <mat-label>Model Year</mat-label>
+          <input matInput formControlName="model_year" placeholder="Filter by model year">
+        </mat-form-field>
+      
+        <mat-form-field appearance="fill">
+          <mat-label>Origin</mat-label>
+          <input matInput formControlName="origin" placeholder="Filter by origin">
+        </mat-form-field>
+      </form>
+
+      <!-- Table -->
+      <div class="mat-table-container">
+        <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+          <!-- Define columns -->
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+            <td mat-cell *matCellDef="let element">{{element.name }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="mpg">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>MPG</th>
+            <td mat-cell *matCellDef="let element">{{element.mpg}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="cylinders">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Cylinders</th>
+            <td mat-cell *matCellDef="let element">{{element.cylinders}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="displacement">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Displacement</th>
+            <td mat-cell *matCellDef="let element">{{element.displacement}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="horsepower">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Horsepower</th>
+            <td mat-cell *matCellDef="let element">{{element.horsepower}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="weight">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Weight</th>
+            <td mat-cell *matCellDef="let element">{{element.weight}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="acceleration">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Acceleration</th>
+            <td mat-cell *matCellDef="let element">{{element.acceleration}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="model_year">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Model Year</th>
+            <td mat-cell *matCellDef="let element">{{element.model_year}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="origin">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Origin</th>
+            <td mat-cell *matCellDef="let element">{{element.origin }}</td>
+          </ng-container>
+
+          <!-- Table Header and Row Definitions -->
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+        <div class="actions-container">
+         
+          <button class="download-button" color="primary" (click)="downloadCsv()">Download CSV</button>
+           <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

@@ -1,0 +1,53 @@
+<form [formGroup]="carForm" (ngSubmit)="onSubmit()" class="car-form">
+    <div class="add-car-form-header">
+        <h2>Add A Car Specification</h2>
+    </div>
+
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="name">
+    </mat-form-field>
+  
+    <mat-form-field>
+      <mat-label>MPG</mat-label>
+      <input matInput formControlName="mpg" type="number">
+    </mat-form-field>
+  
+    <mat-form-field>
+      <mat-label>Cylinders</mat-label>
+      <input matInput formControlName="cylinders" type="number">
+    </mat-form-field>
+  
+    <mat-form-field>
+      <mat-label>Displacement</mat-label>
+      <input matInput formControlName="displacement" type="number">
+    </mat-form-field>
+  
+    <mat-form-field>
+      <mat-label>Horsepower</mat-label>
+      <input matInput formControlName="horsepower" type="number">
+    </mat-form-field>
+  
+    <mat-form-field>
+      <mat-label>Weight</mat-label>
+      <input matInput formControlName="weight" type="number">
+    </mat-form-field>
+  
+    <mat-form-field>
+      <mat-label>Acceleration</mat-label>
+      <input matInput formControlName="acceleration" type="number">
+    </mat-form-field>
+  
+    <mat-form-field>
+      <mat-label>Model Year</mat-label>
+      <input matInput formControlName="model_year" type="number">
+    </mat-form-field>
+  
+    <mat-form-field>
+      <mat-label>Origin</mat-label>
+      <input matInput formControlName="origin">
+    </mat-form-field>
+  
+    <button class="create-button" color="primary" type="submit">Add Car</button>
+  </form>
+  

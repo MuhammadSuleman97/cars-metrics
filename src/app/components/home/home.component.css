@@ -1,0 +1,156 @@
+/* home.component.css */
+.mat-table-container {
+    max-width: 100%;
+    overflow: auto;
+  }
+  
+  .mat-card {
+    margin: 20px;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  th.mat-header-cell, td.mat-cell {
+    padding: 8px;
+    text-align: left;
+  }
+  
+  th.mat-header-cell {
+    background-color: #f5f5f5;
+    font-weight: bold;
+  }
+
+  
+.actions-container{
+    display: flex;
+    gap: 80px;
+    margin-left: auto;
+  }
+
+  /* home.component.css */
+.mat-table-container {
+  max-width: 100%;
+  overflow: auto;
+}
+
+mat-card {
+  margin: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th.mat-header-cell, td.mat-cell {
+  padding: 8px;
+  text-align: left;
+}
+
+th.mat-header-cell {
+  background-color: #f5f5f5;
+  font-weight: bold;
+}
+
+  
+
+/* Adjust the form container to have smaller padding and margins */
+.filter-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px; /* Adjust the gap between fields */
+  padding: 16px;
+  max-width: 100%;
+}
+
+/* Make form fields smaller */
+mat-form-field {
+  flex: 1;
+  min-width: 120px; /* Adjust the minimum width of each field */
+  margin: 4px;
+}
+
+/* Optional: Make input fields smaller */
+mat-form-field input {
+  font-size: 14px; /* Adjust the font size of the input fields */
+}
+
+/* Optional: Adjust label size */
+mat-form-field mat-label {
+  font-size: 12px; /* Adjust the font size of the labels */
+}
+
+button {
+  margin: 16px;
+  padding: 8px 16px;
+  font-size: 16px;
+}
+
+.download-button {
+  background-color: #007bff; /* Primary color */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 12px 24px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.download-button:hover {
+  background-color: #0056b3; /* Darker shade for hover effect */
+}
+
+.download-button:focus {
+  outline: none;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.actions-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.create-button {
+  background-color: #28a745; /* Success color */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 12px 24px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  /* Should not cover whole width and right aligned */
+  max-width: 200px;
+  margin-left: auto;
+
+}
+
+.create-button:hover {
+  background-color: #218838; /* Darker shade for hover effect */
+}
+
+.create-button:focus {
+  outline: none;
+}
+
+.upload-container {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Space between the button and the spinner */
+  /* add distanvce frim right corner */
+  margin-left: auto;
+}
+
+.upload-spinner {
+  margin-left: 10px; /* Adjust as needed to position the spinner */
+}

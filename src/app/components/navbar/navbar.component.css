@@ -1,0 +1,19 @@
+/* src/app/navbar/navbar.component.css */
+.example-spacer {
+    flex: 1 1 auto;
+}
+
+.example-button-container {
+    display: flex;
+    align-items: center; /* Align items vertically */
+    margin-left: auto; /* Push button container to the right */
+}
+
+.example-button {
+    display: flex;
+    align-items: center; /* Align icon and text vertically */
+}
+
+.mat-icon {
+    margin-right: 8px; /* Space between icon and text */
+}
