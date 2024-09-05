@@ -11,6 +11,7 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { CarService } from '../../services/car.service';
 import { Router } from '@angular/router';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSnackBar } from '@angular/material/snack-bar'; // Import MatSnackBar for notifications
 import { NgIf } from '@angular/common';
 
 export interface Car {
@@ -39,7 +40,6 @@ export interface Car {
     ReactiveFormsModule,
     MatProgressSpinnerModule,
     NgIf
-    // HttpClientModule
   ],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
@@ -53,7 +53,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
   @ViewChild(MatSort) sort: MatSort | undefined;
 
-  constructor(private carService: CarService, private router: Router) {
+  constructor(private carService: CarService, private router: Router, private snackBar: MatSnackBar) {
     this.filterForm = new FormGroup({
       name: new FormControl(''),
       mpg: new FormControl(''),
@@ -83,8 +83,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
       });
     };
 
-    if (typeof window !== 'undefined') {
-      // Browser environment
+    if (this.isBrowser()) {
       const savedFilter = localStorage.getItem('carFilter');
       if (savedFilter) {
         this.filterForm.setValue(JSON.parse(savedFilter), { emitEvent: false });
@@ -104,14 +103,11 @@ export class HomeComponent implements OnInit, AfterViewInit {
     if (this.sort) {
       this.dataSource.sort = this.sort;
       
-      // Restore sorting state
-      if (this.sort) {
-        const sortState = JSON.parse(localStorage.getItem('sortState') || '{}');
-        if (sortState.active && sortState.direction) {
-          this.sort.active = sortState.active;
-          this.sort.direction = sortState.direction;
-          this.dataSource.sort = this.sort;
-        }
+      const sortState = this.isBrowser() ? JSON.parse(localStorage.getItem('sortState') || '{}') : {};
+      if (sortState.active && sortState.direction) {
+        this.sort.active = sortState.active;
+        this.sort.direction = sortState.direction;
+        this.dataSource.sort = this.sort;
       }
 
       this.sort.sortChange.subscribe(() => {
@@ -133,22 +129,25 @@ export class HomeComponent implements OnInit, AfterViewInit {
         this.dataSource.data = cars;
       },
       error: (err) => {
-        console.error('Error fetching car data:', err);
+        this.handleError('Error fetching car data', err);
       }
     });
   }
 
   downloadCsv(): void {
-    this.carService.downloadCsv().subscribe(response => {
-      const blob = new Blob([response], { type: 'text/csv' });
-      const url = window.URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'cars.csv';
-      a.click();
-      window.URL.revokeObjectURL(url);
-    }, error => {
-      console.error('Error downloading CSV:', error);
+    this.carService.downloadCsv().subscribe({
+      next: (response) => {
+        const blob = new Blob([response], { type: 'text/csv' });
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'cars.csv';
+        a.click();
+        window.URL.revokeObjectURL(url);
+      },
+      error: (err) => {
+        this.handleError('Error downloading CSV', err);
+      }
     });
   }
 
@@ -169,17 +168,26 @@ export class HomeComponent implements OnInit, AfterViewInit {
   onFileChange(event: any): void {
     const file = event.target.files[0];
     if (file) {
-      this.isLoading = true; // Show the loader
+      this.isLoading = true;
       this.carService.uploadCarCSV(file).subscribe({
         next: () => {
           this.loadCars();
-          this.isLoading = false; // Hide the loader after upload
+          this.isLoading = false;
         },
         error: (err) => {
-          console.error('Error uploading file:', err);
-          this.isLoading = false; // Hide the loader if there is an error
+          this.handleError('Error uploading file', err);
+          this.isLoading = false;
         }
       });
     }
+  }
+
+  private handleError(message: string, error: any): void {
+    console.error(message, error);
+    this.snackBar.open(message, 'Close', { duration: 5000 });
+  }
+
+  isBrowser(): boolean {
+    return typeof window !== 'undefined';
   }
 }

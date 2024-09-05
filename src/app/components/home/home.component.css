@@ -1,3 +1,11 @@
+
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Distributes items with space between */
+  padding-left: 20px;
+}
+
 /* home.component.css */
 .mat-table-container {
     max-width: 100%;
@@ -29,6 +37,16 @@
     gap: 80px;
     margin-left: auto;
   }
+
+/*  action container responsicve */
+@media (max-width: 600px) {
+    .actions-container {
+      flex-direction: column;
+      gap: 20px;
+    }
+  }
+
+
 
   /* home.component.css */
 .mat-table-container {
@@ -152,5 +170,5 @@ button {
 }
 
 .upload-spinner {
-  margin-left: 10px; /* Adjust as needed to position the spinner */
+  padding-right: 30px; /* Adjust as needed to position the spinner */
 }
